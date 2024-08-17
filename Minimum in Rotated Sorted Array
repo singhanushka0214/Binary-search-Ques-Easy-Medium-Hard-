@@ -1,0 +1,27 @@
+int findMin(vector<int>& a)
+{
+	// Write your code here.
+	int n = a.size();
+	int low = 0;
+	int high = n-1;
+	int ans = INT_MAX;
+	while(low <= high){
+		int mid = (low + high) / 2;
+		// if search space is already sorted
+		if(a[low] <= a[high]){
+			ans = min(ans, a[low]);
+			break;
+		}
+		// if left half is sorted
+		if(a[low] <= a[mid]){
+			ans = min(ans, a[low]);
+			low = mid + 1;
+		}
+		// if right half is sorted
+		else{
+			ans = min(ans, a[mid]);
+			high = mid-1;
+		}
+	}
+	return ans;
+}
