@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+int findKRotation(vector<int> &a){
+    // Write your code here. 
+    // Write your code here.
+	int n = a.size();
+	int low = 0;
+	int high = n-1;
+	int ans = INT_MAX;
+    int index = -1;
+	while(low <= high){
+		int mid = (low + high) / 2;
+		// if search space is already sorted
+		if(a[low] <= a[high]){
+			if(a[low] < ans){
+                index = low;
+                ans = a[low];
+            }
+			break;
+		}
+		// if left half is sorted
+		if(a[low] <= a[mid]){
+			if(a[low] < ans){
+                ans = a[low];
+                index = low;
+            }
+			low = mid + 1;
+		}
+		// if right half is sorted
+		else{
+			if(a[mid] <= ans){
+                ans = a[mid];
+                index = mid;
+            }
+			high = mid-1;
+		}
+	}
+	return index;  
+}
