@@ -1,0 +1,35 @@
+int lowerBound(vector<int> a, int n, int x) {
+	// Write your code here
+	int ans = n;
+	int low = 0, high = n-1;
+	while(low<=high){
+		int mid = (low + high)/2;
+		if(a[mid] >= x){
+			ans = mid;
+			high = mid-1;
+		}
+		else low = mid+1;
+	}
+	return ans;
+}
+int upperBound(vector<int> &a, int n, int x){
+	// Write your code here.		
+	int ans = n;
+	int low = 0, high = n-1;
+	while(low<=high){
+		int mid = (low + high)/2;
+		if(a[mid] > x){
+			ans = mid;
+			high = mid-1;
+		}
+		else low = mid+1;
+	}
+	return ans;
+}
+    vector<int> searchRange(vector<int>& a, int k) {
+        int n = a.size();
+        int lb = lowerBound(a, n, k);
+        if(lb == n || a[lb] != k) return {-1, -1};
+        int ub = upperBound(a, n, k);
+        return {lb, ub-1};
+    }
