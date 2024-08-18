@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+int findmax(vector<int> v){
+    int maxi = INT_MIN;
+    int n = v.size();
+    for(int i=0; i<n; i++){
+        maxi = max(maxi, v[i]);
+    }
+    return maxi;
+}
+int func(vector<int> v, int h){
+    int toth = 0;
+    for(int i=0; i<v.size(); i++){
+        toth += ceil((double)v[i] / (double)h);
+    }
+    return toth;
+
+}
+int minimumRateToEatBananas(vector<int> v, int h) {
+    // Write Your Code Here
+    int low = 1, high = findmax(v);
+    int ans = INT_MAX;
+    while(low<=high){
+        int mid = (low + high)/2;
+        int totalhrs = func(v, mid);
+        if(totalhrs <= h){
+            ans = mid;
+            high = mid-1;
+        }
+        else{
+            low = mid+1;
+        }
+    }
+    return low;
+}
