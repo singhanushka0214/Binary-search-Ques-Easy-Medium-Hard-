@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+int func(vector<int> arr, int pages){
+    int n = arr.size();
+    int stud = 1, pagesStudent = 0;
+    for(int i=0; i<n; i++){
+        if(pagesStudent + arr[i] <= pages){
+            pagesStudent += arr[i];
+        }
+        else{
+            stud++;
+            pagesStudent = arr[i];
+        }
+    }
+    return stud;
+}
+
+int findPages(vector<int>& arr, int n, int m) {
+    // Write your code here
+    if(m > n) return -1;
+    int low = *max_element(arr.begin(), arr.end());
+    int high = accumulate(arr.begin(), arr.end(), 0);
+    while(low <= high){
+       int mid = (low+high)/2;
+       int nostud = func(arr, mid);
+       if(nostud > m) low = mid+1;
+       else high = mid-1;
+    }
+    return low;
+}
